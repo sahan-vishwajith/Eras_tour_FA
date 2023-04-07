@@ -1,0 +1,167 @@
+interface IBackUP{
+    public void Backup();
+}
+abstract class Artist{
+    private String name;
+    public void SetName(String name){
+        this.name=name;
+    }
+    public String GetName(){
+        return name;
+    }
+}
+abstract class Singer extends Artist{
+    public void Singing(){
+        System.out.println("this is the singing method of singer class");
+    }
+}
+class BackupSinger extends Singer implements IBackUP{
+    @Override
+    public void Backup() {
+        System.out.println("this is method Backup in BackupSinger class");
+    }
+    BackupSinger(String name){
+        this.SetName(name);
+    };
+}
+class MainArtist extends Singer{
+    MainArtist(String name){
+        this.SetName(name);
+    }
+}
+class BackupDancer extends Artist implements IBackUP{
+    public void Dance(){
+        System.out.println("this is the method of dancing in BackupDancer class");
+    }
+
+    @Override
+    public void Backup() {
+        System.out.println("this is the method of backup in BackupDancer class");
+    }
+    BackupDancer(String name){
+        this.SetName(name);
+    };
+}
+class MusicTrack{
+    public String name;
+    public Integer duration;
+    MusicTrack(String name){
+        this.name=name;
+        this.duration=duration;
+    }
+    public String GetName(){
+        return this.name;
+    }
+    public Integer GetDuration(){
+        return this.duration;
+    }
+}
+abstract class performance{
+    private MainArtist MainArtist;
+    public void SetMAinArtist(MainArtist Artists){
+        this.MainArtist=Artists;
+    }
+    public MainArtist GetMainArtist(){
+        return this.MainArtist;
+    }
+    public String PerformanceName;
+
+    public void setPerformanceName(String performanceName) {
+        this.PerformanceName = performanceName;
+    }
+    public String GetPerformanceName(){
+        return this.PerformanceName;
+    }
+
+    private Integer Year;
+
+    public Integer GetYear() {
+        return Year;
+    }
+    private String Venue;
+
+
+    public String GetVenue() {
+        return Venue;
+    }
+
+    private MusicTrack[] TrackList;
+
+    public void setTrackList(MusicTrack[] trackList) {
+        TrackList = trackList;
+    }
+
+    public MusicTrack[] getTrackList() {
+        return TrackList;
+    }
+
+    public BackupDancer[] BackupDancers;
+
+    public void setBackupDancers(BackupDancer[] backupDancers) {
+        BackupDancers = backupDancers;
+    }
+
+    public BackupDancer[] getBackupDancers() {
+        return BackupDancers;
+    }
+
+    public BackupSinger[] BackupSingers;
+
+    public void setBackupSingers(BackupSinger[] backupSingers) {
+        BackupSingers = backupSingers;
+    }
+
+    public BackupSinger[] getBackupSingers() {
+        return BackupSingers;
+    }
+    public performance(Integer year,String place){
+        super();
+        this.Year=year;
+        this.Venue=place;
+    }
+}
+class LivePerformance extends performance{
+    public void InteractWithAudience(){
+        System.out.println("this is the method InteractWithAudience in LivePerformance class");
+    }
+    public void Record(){
+        System.out.println("this is the method record in LivePerformance class");
+    }
+    LivePerformance(Integer year,String place){
+        super(year,place);
+    };
+}
+class StudioPerformance extends performance{
+    public void AudioProcess(){
+        System.out.println("this is the method Audio process in StudioPerformance class");
+    }
+    public void Record(){
+        System.out.println("this is method Record in StudioPerformance class");
+    }
+    StudioPerformance(Integer year,String place){
+        super(year,place);
+    };
+}
+public class Main {
+
+    public static void main(String[] args) {
+        LivePerformance ErasTourOfTaylor=new LivePerformance(2023,"Glendale");
+        ErasTourOfTaylor.setPerformanceName("Eras Tour");
+        MainArtist mainartist=new MainArtist("Taylor Swift");
+        ErasTourOfTaylor.SetMAinArtist(mainartist);
+        MusicTrack track1=new MusicTrack(" Lavender Haze");
+        MusicTrack track2=new MusicTrack(" All Too Well, the lakes");
+        MusicTrack track3=new MusicTrack(" The Man");
+        MusicTrack track4=new MusicTrack("  Love Story");
+        MusicTrack[] tracklist=new MusicTrack[]{track1,track2,track3,track4};
+        BackupSinger singer1=new BackupSinger("Jeslyn");
+        BackupSinger singer2=new BackupSinger("Melanie");
+        BackupSinger[] singerslist=new BackupSinger[]{singer1,singer2};
+        BackupDancer dancer1=new BackupDancer("Stephanie");
+        BackupDancer dancer2=new BackupDancer("Jake");
+        BackupDancer[] dancerslist=new BackupDancer[]{dancer1,dancer2};
+        ErasTourOfTaylor.setTrackList(tracklist);
+        ErasTourOfTaylor.setBackupSingers(singerslist);
+        ErasTourOfTaylor.setBackupDancers(dancerslist);
+    }
+}
